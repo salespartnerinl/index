@@ -229,6 +229,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            text-decoration: none; /* Crucial for anchor tag styling */
         }
         .custom-product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
         
@@ -261,6 +262,7 @@
             font-size: 0.95rem;
             color: #444;
             line-height: 1.5;
+            margin: 0;
         }
         
         .card-bottom-section {
@@ -447,7 +449,6 @@
         .download-info i { font-size: 2.5rem; color: var(--primary-maroon); }
         .download-info h4 { font-size: 1.15rem; color: var(--text-dark); font-weight: 600; margin-bottom: 4px; }
         
-        /* Action buttons grouping */
         .action-group {
             display: flex;
             gap: 12px;
@@ -561,7 +562,7 @@
             
             <div class="product-grid">
                 
-                <div class="custom-product-card" onclick="window.location.href='gain-insta-income.html'">
+                <a href="GAIN.html" class="custom-product-card">
                     <div class="custom-badge">Guaranteed Income Every Year</div>
                     
                     <div class="card-top-section">
@@ -586,7 +587,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </a>
 
             </div>
         </section>
@@ -711,10 +712,8 @@
         }
 
         function shareBrochureWhatsApp() {
-            // Automatically detect the live GitHub directory URL
             let currentUrl = window.location.href;
             
-            // Strip the filename off the URL if it exists (like index.html)
             let baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
             if (currentUrl.endsWith('/')) {
                 baseUrl = currentUrl.slice(0, -1);
