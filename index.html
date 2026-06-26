@@ -176,7 +176,12 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 24px; 
         }
+        
         .module-card { 
+            appearance: none;
+            outline: none;
+            font-family: inherit;
+            width: 100%;
             background: var(--white); 
             border-radius: var(--radius-lg); 
             padding: 40px 30px; 
@@ -187,6 +192,11 @@
             border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
         .module-card::before {
             content: '';
@@ -200,6 +210,7 @@
             transform: translateY(-8px); 
             box-shadow: var(--shadow-lg); 
             border-color: transparent;
+            text-decoration: none;
         }
         .module-card:hover::before { opacity: 1; }
         .module-card i { 
@@ -229,7 +240,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            text-decoration: none; /* Crucial for anchor tag styling */
+            text-decoration: none; 
         }
         .custom-product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
         
@@ -430,7 +441,7 @@
         .store-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
         .store-btn i { font-size: 1.6rem; color: var(--text-dark); }
 
-        /* --- Downloads --- */
+        /* --- Downloads / Forms --- */
         .card-container { 
             background: var(--white); 
             border-radius: var(--radius-lg); 
@@ -512,7 +523,7 @@
         <section id="view-home" class="view-section active">
             
             <div class="hero-banner">
-                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80" alt="Corporate Trust and Security">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80" loading="lazy" alt="Corporate Trust and Security">
                 <div class="hero-content">
                     <h1>Welcome Partner</h1>
                     <p>Empowering you to protect families and build futures.</p>
@@ -520,18 +531,35 @@
             </div>
             
             <div class="module-grid">
-                <div class="module-card" onclick="navigateTo('view-product-select')">
+                <!-- 1. Quick Quote -->
+                <button class="module-card" onclick="navigateTo('view-product-select')">
                     <i class="fa-solid fa-calculator"></i>
-                    <h2>Premium Calculator</h2>
-                </div>
-                <div class="module-card" onclick="navigateTo('view-downloads')">
-                    <i class="fa-solid fa-cloud-arrow-down"></i>
-                    <h2>Downloads</h2>
-                </div>
-                <div class="module-card" onclick="navigateTo('view-claims')">
+                    <h2>Quick Quote</h2>
+                </button>
+                
+                <!-- 2. Proposal Tracker -->
+                <a href="https://rlifews.indusindnipponlife.com/trackproposal/" target="_blank" rel="noopener noreferrer" class="module-card">
+                    <i class="fa-solid fa-file-contract"></i>
+                    <h2>Proposal Tracker</h2>
+                </a>
+
+                <!-- 3. Web Links -->
+                <button class="module-card" onclick="navigateTo('view-weblinks')">
+                    <i class="fa-solid fa-link"></i>
+                    <h2>Web Links</h2>
+                </button>
+
+                <!-- 4. Forms -->
+                <button class="module-card" onclick="navigateTo('view-forms')">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <h2>Forms</h2>
+                </button>
+
+                <!-- 5. Claims & Support -->
+                <button class="module-card" onclick="navigateTo('view-claims')">
                     <i class="fa-solid fa-hand-holding-medical"></i>
                     <h2>Claims & Support</h2>
-                </div>
+                </button>
             </div>
 
             <div class="app-promo">
@@ -556,12 +584,35 @@
             </div>
         </section>
 
+        <!-- WEBLINKS SECTION -->
+        <section id="view-weblinks" class="view-section">
+            <h2 class="section-title">Quick Weblinks</h2>
+            <p class="section-subtitle">Access important customer service and payment portals</p>
+            
+            <div class="module-grid">
+                <a href="https://customer.reliancenipponlife.com/pdcSelflink/" target="_blank" rel="noopener noreferrer" class="module-card">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <h2>Self Payment</h2>
+                </a>
+                
+                <a href="https://customer.reliancenipponlife.com/enach/" target="_blank" rel="noopener noreferrer" class="module-card">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <h2>NACH Registration</h2>
+                </a>
+                
+                <a href="https://customer.indusindnipponlife.com/MyServices/paypremium-online.aspx?UTM_Source=Website&UTM_Medium=NA&UTM_Campaign=NA&_ga=2.145537213.825716248.1542086739-36342821.1539799707" target="_blank" rel="noopener noreferrer" class="module-card">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <h2>Renewal Payment</h2>
+                </a>
+            </div>
+        </section>
+
+        <!-- QUICK QUOTE SECTION -->
         <section id="view-product-select" class="view-section">
-            <h2 class="section-title">Premium Calculator</h2>
+            <h2 class="section-title">Quick Quote</h2>
             <p class="section-subtitle">Select a plan to generate a customized client quote</p>
             
             <div class="product-grid">
-                
                 <a href="GAIN.html" class="custom-product-card">
                     <div class="custom-badge">Guaranteed Income Every Year</div>
                     
@@ -588,45 +639,121 @@
                         </ul>
                     </div>
                 </a>
-
             </div>
         </section>
 
-        <section id="view-downloads" class="view-section">
+        <!-- FORMS SECTION -->
+        <section id="view-forms" class="view-section">
             <div class="card-container">
-                <h2 class="section-title">Downloads Center</h2>
-                <p class="section-subtitle">Access marketing collateral and forms</p>
+                <h2 class="section-title">Forms Center</h2>
+                <p class="section-subtitle">Access and share essential forms and documents</p>
                 
+                <!-- 1. NACH FORM -->
                 <div class="download-item">
                     <div class="download-info">
                         <i class="fa-solid fa-file-pdf"></i>
                         <div>
-                            <h4>Gain - Insta Income</h4>
-                            <small style="color: var(--text-muted);">Product Brochure (PDF)</small>
+                            <h4>NACH FORM</h4>
+                            <small style="color: var(--text-muted);">PDF Document</small>
                         </div>
                     </div>
-                    
                     <div class="action-group">
-                        <button onclick="shareBrochureWhatsApp()" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share on WhatsApp">
+                        <button onclick="shareFileNative('nach-form.pdf', 'NACH FORM')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
                             <i class="fa-brands fa-whatsapp"></i>
                         </button>
-                        <a href="gain-insta-income-brochure.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
+                        <a href="nach-form.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
                             <i class="fa-solid fa-download"></i>
                         </a>
                     </div>
-
                 </div>
+
+                <!-- 2. NRI Questionnaire -->
+                <div class="download-item">
+                    <div class="download-info">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <div>
+                            <h4>NRI Questionnaire</h4>
+                            <small style="color: var(--text-muted);">PDF Document</small>
+                        </div>
+                    </div>
+                    <div class="action-group">
+                        <button onclick="shareFileNative('nri-questionnaire.pdf', 'NRI Questionnaire')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                        <a href="nri-questionnaire.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Form 60 -->
+                <div class="download-item">
+                    <div class="download-info">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <div>
+                            <h4>Form 60</h4>
+                            <small style="color: var(--text-muted);">PDF Document</small>
+                        </div>
+                    </div>
+                    <div class="action-group">
+                        <button onclick="shareFileNative('form-60.pdf', 'Form 60')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                        <a href="form-60.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4. Customer Declaration Form (CDF) -->
+                <div class="download-item">
+                    <div class="download-info">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <div>
+                            <h4>Customer Declaration Form (CDF)</h4>
+                            <small style="color: var(--text-muted);">PDF Document</small>
+                        </div>
+                    </div>
+                    <div class="action-group">
+                        <button onclick="shareFileNative('cdf-form.pdf', 'Customer Declaration Form')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                        <a href="cdf-form.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5. Declaration Cum Acknowledgement -->
+                <div class="download-item">
+                    <div class="download-info">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <div>
+                            <h4>Declaration Cum Acknowledgement</h4>
+                            <small style="color: var(--text-muted);">PDF Document</small>
+                        </div>
+                    </div>
+                    <div class="action-group">
+                        <button onclick="shareFileNative('declaration-cum-acknowledgement.pdf', 'Declaration Cum Acknowledgement')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </button>
+                        <a href="declaration-cum-acknowledgement.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </section>
 
+        <!-- CLAIMS & SUPPORT SECTION -->
         <section id="view-claims" class="view-section">
-            
             <div class="claims-wrapper">
                 <div class="claims-left">
                     <h2>Claims</h2>
                     <p>At IndusInd Nippon Life Insurance, we understand this is a difficult time. That’s why we deliver compassionate, seamless claim settlements, backed by our 10-Day Guarantee&reg; for Death Claims.</p>
                     
-                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80" alt="Customer Support Agent" class="claims-support-img">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Customer Support Agent" class="claims-support-img">
 
                     <div class="claims-stats">
                         <div class="stat-item">
@@ -670,7 +797,6 @@
                     <p style="margin-top: 10px;">Landline: <a href="tel:+97143972100">+971 4397 2100</a></p>
                 </div>
             </div>
-
         </section>
     </main>
 
@@ -679,13 +805,13 @@
     </footer>
 
     <script>
-        const viewHistory = [];
+        const viewHistory = ['view-home'];
         
         document.addEventListener('DOMContentLoaded', () => { 
-            navigateTo('view-home'); 
+            navigateTo('view-home', false); 
         });
 
-        function navigateTo(viewId) {
+        function navigateTo(viewId, pushToHistory = true) {
             document.querySelectorAll('.view-section').forEach(el => {
                 el.classList.remove('active');
             });
@@ -695,34 +821,83 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             const backBtn = document.getElementById('backBtn');
-            if(viewId === 'view-home') {
+            if (viewId === 'view-home') {
                 backBtn.style.display = 'none';
-                viewHistory.length = 0; 
+                viewHistory.length = 1; 
+                viewHistory[0] = 'view-home';
             } else {
                 backBtn.style.display = 'block';
-                if(viewHistory[viewHistory.length - 1] !== viewId) { 
-                    viewHistory.push(viewId); 
+                if (pushToHistory && viewHistory[viewHistory.length - 1] !== viewId) {
+                    viewHistory.push(viewId);
                 }
             }
         }
 
         function goBack() { 
-            viewHistory.pop(); 
-            navigateTo(viewHistory.pop() || 'view-home'); 
+            if (viewHistory.length > 1) {
+                viewHistory.pop(); 
+                const prevView = viewHistory[viewHistory.length - 1]; 
+                navigateTo(prevView, false); 
+            } else {
+                navigateTo('view-home'); 
+            }
         }
 
-        function shareBrochureWhatsApp() {
+        async function shareFileNative(fileName, fileTitle) {
             let currentUrl = window.location.href;
             
+            // Build the absolute URL for the PDF
             let baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
             if (currentUrl.endsWith('/')) {
                 baseUrl = currentUrl.slice(0, -1);
             }
-
-            const pdfUrl = `${baseUrl}/gain-insta-income-brochure.pdf`;
-            const message = `Hello! Please find the brochure for the *INL Guaranteed Advantage Income Plan* here:\n\n${pdfUrl}`;
+            const pdfUrl = `${baseUrl}/${fileName}`;
             
-            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+            // Apply the beautifully formatted formal text using line breaks (\n\n)
+            const professionalText = `Dear Sir/Madam,\n\nPlease find enclosed the *${fileTitle}* pertaining to your policy requirements.\n\nKindly complete the needful action.\n\nFor any queries, I am available to assist you.`;
+            
+            // Formatted fallback message if the file cannot be attached natively
+            const fallbackMessage = `${professionalText}\n\n🔗 *Document Link:* \n${pdfUrl}`;
+
+            // Check if the browser supports the Web Share API
+            if (navigator.share) {
+                try {
+                    // Attempt to fetch the actual file to attach it directly
+                    const response = await fetch(fileName);
+                    const blob = await response.blob();
+                    const file = new File([blob], fileName, { type: 'application/pdf' });
+
+                    // Check if the device allows sharing this specific file type
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            title: fileTitle,
+                            text: professionalText, 
+                            files: [file] 
+                        });
+                        return; // Success! Exit the function.
+                    } else {
+                        // Fallback: Share the text and link via native menu if file attachment is blocked
+                        await navigator.share({
+                            title: fileTitle,
+                            text: fallbackMessage
+                        });
+                    }
+                } catch (error) {
+                    console.warn("Could not share file directly, falling back to text share.", error);
+                    // Catch network/fetch errors and fallback to sharing just the text
+                    try {
+                        await navigator.share({
+                            title: fileTitle,
+                            text: fallbackMessage
+                        });
+                    } catch (e) {
+                        console.error("Native share cancelled or failed:", e);
+                    }
+                }
+            } else {
+                // Ultimate Fallback: For desktop browsers without Web Share API support
+                window.open(`https://wa.me/?text=${encodeURIComponent(fallbackMessage)}`, '_blank');
+            }
         }
     </script>
 </body>
