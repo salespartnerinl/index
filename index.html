@@ -173,8 +173,8 @@
         /* --- Module Grids --- */
         .module-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 24px; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 20px; 
         }
         
         .module-card { 
@@ -184,7 +184,7 @@
             width: 100%;
             background: var(--white); 
             border-radius: var(--radius-lg); 
-            padding: 40px 30px; 
+            padding: 30px 20px; 
             text-align: center; 
             box-shadow: var(--shadow-md); 
             cursor: pointer; 
@@ -198,6 +198,7 @@
             justify-content: center;
             text-decoration: none;
         }
+        
         .module-card::before {
             content: '';
             position: absolute;
@@ -206,21 +207,39 @@
             opacity: 0;
             transition: opacity var(--transition-speed);
         }
+        
         .module-card:hover { 
-            transform: translateY(-8px); 
+            transform: translateY(-6px); 
             box-shadow: var(--shadow-lg); 
             border-color: transparent;
             text-decoration: none;
         }
+        
         .module-card:hover::before { opacity: 1; }
-        .module-card i { 
-            font-size: 3rem; 
-            color: var(--primary-maroon); 
-            margin-bottom: 24px; 
-            transition: transform var(--transition-speed);
+        .module-card:active {
+            transform: translateY(-2px);
+            background-color: #fcfcfc;
         }
-        .module-card:hover i { transform: scale(1.1); }
-        .module-card h2 { font-size: 1.4rem; color: var(--text-dark); font-weight: 600; }
+        
+        .module-card i { 
+            font-size: 2.2rem; 
+            background: linear-gradient(135deg, var(--primary-maroon), var(--image-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px; 
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .module-card:hover i { 
+            transform: scale(1.1) translateY(-3px); 
+        }
+        
+        .module-card h2 { 
+            font-size: 1.15rem; 
+            color: var(--text-dark); 
+            font-weight: 500; 
+            letter-spacing: 0.3px; 
+        }
 
         /* --- Custom Product Card --- */
         .product-grid {
@@ -401,46 +420,6 @@
         .office-details a { color: var(--gold); text-decoration: none; }
         .office-details a:hover { text-decoration: underline; }
 
-        /* --- App Promo Banner --- */
-        .app-promo { 
-            background: linear-gradient(135deg, var(--dark-maroon) 0%, var(--primary-maroon) 100%); 
-            border-radius: var(--radius-lg); 
-            margin-top: 60px; 
-            padding: 40px 30px; 
-            color: var(--white); 
-            text-align: center; 
-            box-shadow: var(--shadow-lg); 
-            position: relative;
-            overflow: hidden;
-        }
-        .app-promo::after {
-            content: '\f10b';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            right: -20px;
-            bottom: -40px;
-            font-size: 12rem;
-            color: rgba(255,255,255,0.05);
-            pointer-events: none;
-        }
-        .app-promo h2 { font-size: 2rem; margin-bottom: 12px; font-weight: 700; letter-spacing: -0.5px; }
-        .app-promo p { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; }
-        .store-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-        .store-btn { 
-            background: var(--white); 
-            color: var(--text-dark); 
-            padding: 12px 24px; 
-            border-radius: 10px; 
-            text-decoration: none; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 12px; 
-            transition: all var(--transition-speed); 
-        }
-        .store-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .store-btn i { font-size: 1.6rem; color: var(--text-dark); }
-
         /* --- Downloads / Forms --- */
         .card-container { 
             background: var(--white); 
@@ -503,6 +482,14 @@
             .hero-banner { height: 200px; }
             .hero-content h1 { font-size: 2rem; }
         }
+        
+        /* --- Print Optimization for One-Pagers --- */
+        @media print {
+            header, .action-group { display: none !important; }
+            .view-section { padding: 0; display: block !important; }
+            body { background-color: white; }
+            .module-card, .custom-product-card, .card-container { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
 <body>
@@ -531,60 +518,33 @@
             </div>
             
             <div class="module-grid">
-                <!-- 1. Quick Quote -->
                 <button class="module-card" onclick="navigateTo('view-product-select')">
                     <i class="fa-solid fa-calculator"></i>
                     <h2>Quick Quote</h2>
                 </button>
                 
-                <!-- 2. Proposal Tracker -->
                 <a href="https://rlifews.indusindnipponlife.com/trackproposal/" target="_blank" rel="noopener noreferrer" class="module-card">
                     <i class="fa-solid fa-file-contract"></i>
                     <h2>Proposal Tracker</h2>
                 </a>
 
-                <!-- 3. Web Links -->
                 <button class="module-card" onclick="navigateTo('view-weblinks')">
                     <i class="fa-solid fa-link"></i>
                     <h2>Web Links</h2>
                 </button>
 
-                <!-- 4. Forms -->
                 <button class="module-card" onclick="navigateTo('view-forms')">
                     <i class="fa-regular fa-file-lines"></i>
                     <h2>Forms</h2>
                 </button>
 
-                <!-- 5. Claims & Support -->
                 <button class="module-card" onclick="navigateTo('view-claims')">
                     <i class="fa-solid fa-hand-holding-medical"></i>
                     <h2>Claims & Support</h2>
                 </button>
             </div>
-
-            <div class="app-promo">
-                <h2>INLIC Customer Connect</h2>
-                <p>Manage policies seamlessly. Anytime, anywhere.</p>
-                <div class="store-buttons">
-                    <a href="#" class="store-btn">
-                        <i class="fa-brands fa-google-play"></i>
-                        <div style="text-align: left; line-height: 1.2;">
-                            <span style="font-size: 0.7rem; font-weight: 500; color: var(--text-muted);">GET IT ON</span><br>
-                            <span style="font-weight: 700;">Google Play</span>
-                        </div>
-                    </a>
-                    <a href="#" class="store-btn">
-                        <i class="fa-brands fa-apple"></i>
-                        <div style="text-align: left; line-height: 1.2;">
-                            <span style="font-size: 0.7rem; font-weight: 500; color: var(--text-muted);">Download on the</span><br>
-                            <span style="font-weight: 700;">App Store</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
         </section>
 
-        <!-- WEBLINKS SECTION -->
         <section id="view-weblinks" class="view-section">
             <h2 class="section-title">Quick Weblinks</h2>
             <p class="section-subtitle">Access important customer service and payment portals</p>
@@ -607,7 +567,6 @@
             </div>
         </section>
 
-        <!-- QUICK QUOTE SECTION -->
         <section id="view-product-select" class="view-section">
             <h2 class="section-title">Quick Quote</h2>
             <p class="section-subtitle">Select a plan to generate a customized client quote</p>
@@ -642,13 +601,11 @@
             </div>
         </section>
 
-        <!-- FORMS SECTION -->
         <section id="view-forms" class="view-section">
             <div class="card-container">
                 <h2 class="section-title">Forms Center</h2>
                 <p class="section-subtitle">Access and share essential forms and documents</p>
                 
-                <!-- 1. NACH FORM -->
                 <div class="download-item">
                     <div class="download-info">
                         <i class="fa-solid fa-file-pdf"></i>
@@ -658,7 +615,7 @@
                         </div>
                     </div>
                     <div class="action-group">
-                        <button onclick="shareFileNative('nach-form.pdf', 'NACH FORM')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
+                        <button onclick="shareFileWhatsApp('nach-form.pdf', 'NACH FORM')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share on WhatsApp">
                             <i class="fa-brands fa-whatsapp"></i>
                         </button>
                         <a href="nach-form.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
@@ -667,7 +624,6 @@
                     </div>
                 </div>
 
-                <!-- 2. NRI Questionnaire -->
                 <div class="download-item">
                     <div class="download-info">
                         <i class="fa-solid fa-file-pdf"></i>
@@ -677,7 +633,7 @@
                         </div>
                     </div>
                     <div class="action-group">
-                        <button onclick="shareFileNative('nri-questionnaire.pdf', 'NRI Questionnaire')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
+                        <button onclick="shareFileWhatsApp('nri-questionnaire.pdf', 'NRI Questionnaire')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share on WhatsApp">
                             <i class="fa-brands fa-whatsapp"></i>
                         </button>
                         <a href="nri-questionnaire.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
@@ -686,7 +642,6 @@
                     </div>
                 </div>
 
-                <!-- 3. Form 60 -->
                 <div class="download-item">
                     <div class="download-info">
                         <i class="fa-solid fa-file-pdf"></i>
@@ -696,7 +651,7 @@
                         </div>
                     </div>
                     <div class="action-group">
-                        <button onclick="shareFileNative('form-60.pdf', 'Form 60')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
+                        <button onclick="shareFileWhatsApp('form-60.pdf', 'Form 60')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share on WhatsApp">
                             <i class="fa-brands fa-whatsapp"></i>
                         </button>
                         <a href="form-60.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
@@ -705,7 +660,6 @@
                     </div>
                 </div>
 
-                <!-- 4. Customer Declaration Form (CDF) -->
                 <div class="download-item">
                     <div class="download-info">
                         <i class="fa-solid fa-file-pdf"></i>
@@ -715,7 +669,7 @@
                         </div>
                     </div>
                     <div class="action-group">
-                        <button onclick="shareFileNative('cdf-form.pdf', 'Customer Declaration Form')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
+                        <button onclick="shareFileWhatsApp('cdf-form.pdf', 'Customer Declaration Form')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share on WhatsApp">
                             <i class="fa-brands fa-whatsapp"></i>
                         </button>
                         <a href="cdf-form.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
@@ -724,7 +678,6 @@
                     </div>
                 </div>
 
-                <!-- 5. Declaration Cum Acknowledgement -->
                 <div class="download-item">
                     <div class="download-info">
                         <i class="fa-solid fa-file-pdf"></i>
@@ -734,7 +687,7 @@
                         </div>
                     </div>
                     <div class="action-group">
-                        <button onclick="shareFileNative('declaration-cum-acknowledgement.pdf', 'Declaration Cum Acknowledgement')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share Document natively">
+                        <button onclick="shareFileWhatsApp('declaration-cum-acknowledgement.pdf', 'Declaration Cum Acknowledgement')" class="btn btn-whatsapp" style="padding: 12px 20px;" title="Share on WhatsApp">
                             <i class="fa-brands fa-whatsapp"></i>
                         </button>
                         <a href="declaration-cum-acknowledgement.pdf" class="btn" style="padding: 12px 20px;" download title="Download PDF">
@@ -746,7 +699,6 @@
             </div>
         </section>
 
-        <!-- CLAIMS & SUPPORT SECTION -->
         <section id="view-claims" class="view-section">
             <div class="claims-wrapper">
                 <div class="claims-left">
@@ -812,24 +764,20 @@
         });
 
         function navigateTo(viewId, pushToHistory = true) {
-            document.querySelectorAll('.view-section').forEach(el => {
-                el.classList.remove('active');
-            });
+            const sections = document.querySelectorAll('.view-section');
+            sections.forEach(el => el.classList.remove('active'));
             
             const targetView = document.getElementById(viewId);
-            targetView.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (targetView) {
+                targetView.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
 
             const backBtn = document.getElementById('backBtn');
-            if (viewId === 'view-home') {
-                backBtn.style.display = 'none';
-                viewHistory.length = 1; 
-                viewHistory[0] = 'view-home';
-            } else {
-                backBtn.style.display = 'block';
-                if (pushToHistory && viewHistory[viewHistory.length - 1] !== viewId) {
-                    viewHistory.push(viewId);
-                }
+            backBtn.style.display = (viewId === 'view-home') ? 'none' : 'block';
+            
+            if (pushToHistory && viewHistory[viewHistory.length - 1] !== viewId) {
+                viewHistory.push(viewId);
             }
         }
 
@@ -843,61 +791,18 @@
             }
         }
 
-        async function shareFileNative(fileName, fileTitle) {
+        function shareFileWhatsApp(fileName, fileTitle) {
             let currentUrl = window.location.href;
             
-            // Build the absolute URL for the PDF
             let baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
             if (currentUrl.endsWith('/')) {
                 baseUrl = currentUrl.slice(0, -1);
             }
+
             const pdfUrl = `${baseUrl}/${fileName}`;
+            const message = `Hello! Please find the document for *${fileTitle}* here:\n\n${pdfUrl}`;
             
-            // Apply the beautifully formatted formal text using line breaks (\n\n)
-            const professionalText = `Dear Sir/Madam,\n\nPlease find enclosed the *${fileTitle}* pertaining to your policy requirements.\n\nKindly complete the needful action.\n\nFor any queries, I am available to assist you.`;
-            
-            // Formatted fallback message if the file cannot be attached natively
-            const fallbackMessage = `${professionalText}\n\n🔗 *Document Link:* \n${pdfUrl}`;
-
-            // Check if the browser supports the Web Share API
-            if (navigator.share) {
-                try {
-                    // Attempt to fetch the actual file to attach it directly
-                    const response = await fetch(fileName);
-                    const blob = await response.blob();
-                    const file = new File([blob], fileName, { type: 'application/pdf' });
-
-                    // Check if the device allows sharing this specific file type
-                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                        await navigator.share({
-                            title: fileTitle,
-                            text: professionalText, 
-                            files: [file] 
-                        });
-                        return; // Success! Exit the function.
-                    } else {
-                        // Fallback: Share the text and link via native menu if file attachment is blocked
-                        await navigator.share({
-                            title: fileTitle,
-                            text: fallbackMessage
-                        });
-                    }
-                } catch (error) {
-                    console.warn("Could not share file directly, falling back to text share.", error);
-                    // Catch network/fetch errors and fallback to sharing just the text
-                    try {
-                        await navigator.share({
-                            title: fileTitle,
-                            text: fallbackMessage
-                        });
-                    } catch (e) {
-                        console.error("Native share cancelled or failed:", e);
-                    }
-                }
-            } else {
-                // Ultimate Fallback: For desktop browsers without Web Share API support
-                window.open(`https://wa.me/?text=${encodeURIComponent(fallbackMessage)}`, '_blank');
-            }
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
 </body>
