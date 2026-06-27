@@ -48,6 +48,7 @@
 
         a { color: var(--primary-maroon); text-decoration: none; font-weight: 500; }
         a:hover { text-decoration: underline; }
+        h2:focus { outline: none; } /* Prevents ugly focus ring on programmatic focus */
 
         /* --- Animations --- */
         @keyframes fadeSlideUp { 
@@ -771,6 +772,13 @@
             if (targetView) {
                 targetView.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Accessibility: Shift focus to the new section's title
+                const viewTitle = targetView.querySelector('h2');
+                if (viewTitle) {
+                    viewTitle.setAttribute('tabindex', '-1');
+                    viewTitle.focus({ preventScroll: true });
+                }
             }
 
             const backBtn = document.getElementById('backBtn');
@@ -791,18 +799,37 @@
             }
         }
 
-        function shareFileWhatsApp(fileName, fileTitle) {
-            let currentUrl = window.location.href;
-            
-            let baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
-            if (currentUrl.endsWith('/')) {
-                baseUrl = currentUrl.slice(0, -1);
+        async function shareFileWhatsApp(fileName, fileTitle) {
+            // The exact message format
+            const message = `Dear Sir/Madam,\n\nPlease find enclosed the *${fileTitle}* pertaining to your policy requirements.\n\nKindly complete the needful action.\n\nFor any queries, I am available to assist you.`;
+
+            // 1. Try the modern Web Share API (Works best on mobile devices)
+            if (navigator.canShare && navigator.share) {
+                try {
+                    // Fetch the file and convert it to a file object
+                    const response = await fetch(fileName);
+                    const blob = await response.blob();
+                    const file = new File([blob], fileName, { type: 'application/pdf' });
+
+                    // Check if the device allows sharing this file type
+                    if (navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            files: [file],
+                            title: fileTitle,
+                            text: message
+                        });
+                        return; // Success! Exit the function.
+                    }
+                } catch (error) {
+                    console.log('Web Share API failed or was cancelled, falling back to link sharing.', error);
+                }
             }
 
-            const pdfUrl = `${baseUrl}/${fileName}`;
-            const message = `Hello! Please find the document for *${fileTitle}* here:\n\n${pdfUrl}`;
+            // 2. Fallback for Desktop Web or unsupported browsers
+            const fileUrl = new URL(fileName, window.location.href).href;
+            const fallbackMessage = `${message}\n\nDocument Link: ${fileUrl}`;
             
-            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+            window.open(`https://wa.me/?text=${encodeURIComponent(fallbackMessage)}`, '_blank');
         }
     </script>
 </body>
